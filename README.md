@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/2rvph5vgry8q5re5/branch/master?svg=true)](https://ci.appveyor.com/project/stodoriko/autohw6-bdd/branch/master)
+
 # Домашнее задание к занятию «2.4. BDD»
 
 В качестве результата пришлите ссылки на ваши GitHub-проекты в личном кабинете студента на сайте [netology.ru](https://netology.ru).
