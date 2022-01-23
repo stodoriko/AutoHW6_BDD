@@ -44,4 +44,13 @@ public class MoneyTransferTest {
         cardOneBalanceFinish = dashboardPage.getBalance(dashboardPage.cardOne);
         Assertions.assertEquals(cardOneBalanceStart + sum, cardOneBalanceFinish);
     }
+
+    @Test
+    void shouldTransferMoneyFromOneToTwo() {
+        DataHelper.CardsInfo cardsInfo = DataHelper.getCardsNumbers();
+        CardReplenishment cardReplenishment = dashboardPage.selectCardButton(dashboardPage.cardTwo);
+        cardReplenishment.topUpTheCard(sum, cardsInfo);
+        cardTwoBalanceFinish = dashboardPage.getBalance(dashboardPage.cardTwo);
+        Assertions.assertEquals(cardTwoBalanceStart + sum, cardTwoBalanceFinish);
+    }
 }
