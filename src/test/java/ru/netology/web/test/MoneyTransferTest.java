@@ -20,7 +20,6 @@ public class MoneyTransferTest {
     int cardTwoBalanceStart;
     int cardOneBalanceFinish;
     int cardTwoBalanceFinish;
-    int sum;
 
     @BeforeEach
     void beforeScenarios() {
@@ -31,26 +30,32 @@ public class MoneyTransferTest {
         VerificationPage verificationPage = loginPage.validLogin(authInfo);
         DataHelper.VerificationCode verificationInfo = DataHelper.getVerificationCodeFor();
 
-        DashboardPage dashboardPage = verificationPage.validVerify(verificationInfo);
+        dashboardPage = verificationPage.validVerify(verificationInfo);
         cardOneBalanceStart = dashboardPage.getFirstCardBalance();
         cardTwoBalanceStart = dashboardPage.getSecondCardBalance();
     }
 
     @Test
     void shouldTransferMoneyFromTwoToOne() {
+        int sum = 10000;
         DataHelper.CardsInfo cardsInfo = DataHelper.getCardsNumbers();
         CardReplenishment cardReplenishment = dashboardPage.selectCardButton(dashboardPage.cardOne);
         cardReplenishment.topUpTheCard(sum, cardsInfo);
         cardOneBalanceFinish = dashboardPage.getBalance(dashboardPage.cardOne);
         Assertions.assertEquals(cardOneBalanceStart + sum, cardOneBalanceFinish);
+        System.out.println("expected" + cardOneBalanceStart + sum);
+        System.out.println("actual" + cardOneBalanceFinish);
     }
 
     @Test
     void shouldTransferMoneyFromOneToTwo() {
+        int sum = 1;
         DataHelper.CardsInfo cardsInfo = DataHelper.getCardsNumbers();
         CardReplenishment cardReplenishment = dashboardPage.selectCardButton(dashboardPage.cardTwo);
         cardReplenishment.topUpTheCard(sum, cardsInfo);
         cardTwoBalanceFinish = dashboardPage.getBalance(dashboardPage.cardTwo);
         Assertions.assertEquals(cardTwoBalanceStart + sum, cardTwoBalanceFinish);
+        System.out.println("expected" + cardTwoBalanceStart);
+        System.out.println("actual" + cardTwoBalanceFinish);
     }
 }

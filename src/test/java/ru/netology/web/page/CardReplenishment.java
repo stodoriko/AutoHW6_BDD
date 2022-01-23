@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.$;
 public class CardReplenishment {
 
     private SelenideElement heading = $("[data-test-id=dashboard]");
-    private SelenideElement sum = $("[div[data-test-id=amount] input");
+    private SelenideElement sum = $("[data-test-id=amount] input");
     private SelenideElement whenceField = $("span[data-test-id=from] input");
     private SelenideElement topButton = $("button[data-test-id=action-transfer]");
 
@@ -17,9 +17,10 @@ public class CardReplenishment {
         heading.shouldBe(Condition.visible);
     }
 
-    public void topUpTheCard(int amount, DataHelper.CardsInfo cardsInfo) {
+    public int topUpTheCard(int amount, DataHelper.CardsInfo cardsInfo) {
         sum.setValue(String.valueOf(amount));
         whenceField.setValue(cardsInfo.getCardNumber2());
         topButton.click();
+        return amount;
     }
 }
