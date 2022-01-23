@@ -43,8 +43,6 @@ public class MoneyTransferTest {
         cardReplenishment.topUpTheCard(sum, cardsInfo);
         cardOneBalanceFinish = dashboardPage.getBalance(dashboardPage.cardOne);
         Assertions.assertEquals(cardOneBalanceStart + sum, cardOneBalanceFinish);
-        System.out.println("expected" + cardOneBalanceStart + sum);
-        System.out.println("actual" + cardOneBalanceFinish);
     }
 
     @Test
@@ -55,7 +53,5 @@ public class MoneyTransferTest {
         cardReplenishment.topUpTheCard(sum, cardsInfo);
         cardTwoBalanceFinish = dashboardPage.getBalance(dashboardPage.cardTwo);
         Assertions.assertEquals(cardTwoBalanceStart + sum, cardTwoBalanceFinish);
-        System.out.println("expected" + cardTwoBalanceStart);
-        System.out.println("actual" + cardTwoBalanceFinish);
     }
 }
