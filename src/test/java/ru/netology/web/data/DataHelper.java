@@ -25,7 +25,28 @@ public class DataHelper {
         private String code;
     }
 
-    public static VerificationCode getVerificationCodeFor(AutoInfo autoInfo) {
+    public static VerificationCode getVerificationCodeFor() {
         return new VerificationCode("12345");
     }
+
+    @Value
+    public static class CardsInfo {
+        private String cardNumber1;
+        private String cardNumber2;
+    }
+
+    public static CardsInfo getCardsNumbers() {
+        return new CardsInfo("5559000000000001", "5559000000000002");
+    }
+
+    @Value
+    public static class Replenishment {
+        private String sum;
+        private String fromCard;
+    }
+
+    public static Replenishment getRepSum() {
+        return new Replenishment("500", "");
+    }
+
 }
