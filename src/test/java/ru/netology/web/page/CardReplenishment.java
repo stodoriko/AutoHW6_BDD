@@ -21,13 +21,12 @@ public class CardReplenishment {
         sum.setValue(String.valueOf(amount));
         switch (card) {
             case 1:
-                whenceField.setValue("000000000000" + DashboardPage.getCardOneNumber());
-                break;
-            case 2:
                 whenceField.setValue("000000000000" + DashboardPage.getCardTwoNumber());
                 break;
+            case 2:
+                whenceField.setValue("000000000000" + DashboardPage.getCardOneNumber());
+                break;
         }
-        sum.setValue(String.valueOf(amount));
         topButton.click();
         return amount;
     }
