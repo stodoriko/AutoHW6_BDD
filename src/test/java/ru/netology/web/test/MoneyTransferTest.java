@@ -40,8 +40,8 @@ public class MoneyTransferTest {
         int sum = 10000;
         DataHelper.CardInfo cardInfo = DataHelper.getCardOneId();
         CardReplenishment cardReplenishment = dashboardPage.selectCardButton(cardInfo.getCardId());
-        cardReplenishment.topUpTheCard(sum, 1);
-        cardOneBalanceFinish = DashboardPage.getFirstCardBalance();
+        DashboardPage dashboardPage = cardReplenishment.topUpTheCard(sum, 1);
+        cardOneBalanceFinish = dashboardPage.getFirstCardBalance();
         Assertions.assertEquals(cardOneBalanceStart + sum, cardOneBalanceFinish);
     }
 
@@ -50,8 +50,8 @@ public class MoneyTransferTest {
         int sum = 1;
         DataHelper.CardInfo cardInfo = DataHelper.getCardTwoId();
         CardReplenishment cardReplenishment = dashboardPage.selectCardButton(cardInfo.getCardId());
-        cardReplenishment.topUpTheCard(sum, 2);
-        cardTwoBalanceFinish = DashboardPage.getSecondCardBalance();
+        DashboardPage dashboardPage = cardReplenishment.topUpTheCard(sum, 2);
+        cardTwoBalanceFinish = dashboardPage.getSecondCardBalance();
         Assertions.assertEquals(cardTwoBalanceStart + sum, cardTwoBalanceFinish);
     }
 }

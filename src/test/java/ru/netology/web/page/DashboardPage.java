@@ -56,9 +56,4 @@ public class DashboardPage {
         return new CardReplenishment();
     }
 
-    public static int getBalance(SelenideElement card) {
-        String [] text = card.innerText().split(" ");
-        return Integer.parseInt(text[5]);
-    }
-
 }

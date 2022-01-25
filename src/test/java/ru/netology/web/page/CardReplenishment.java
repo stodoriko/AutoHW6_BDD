@@ -17,7 +17,7 @@ public class CardReplenishment {
         heading.shouldBe(Condition.visible);
     }
 
-    public int topUpTheCard(int amount, int card) {
+    public DashboardPage    topUpTheCard(int amount, int card) {
         sum.setValue(String.valueOf(amount));
         switch (card) {
             case 1:
@@ -28,6 +28,6 @@ public class CardReplenishment {
                 break;
         }
         topButton.click();
-        return amount;
+        return new DashboardPage();
     }
 }
