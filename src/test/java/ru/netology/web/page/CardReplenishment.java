@@ -17,9 +17,17 @@ public class CardReplenishment {
         heading.shouldBe(Condition.visible);
     }
 
-    public int topUpTheCard(int amount, DataHelper.CardsInfo cardsInfo) {
+    public int topUpTheCard(int amount, int card) {
         sum.setValue(String.valueOf(amount));
-        whenceField.setValue(cardsInfo.getCardNumber2());
+        switch (card) {
+            case 1:
+                whenceField.setValue("000000000000" + DashboardPage.getCardOneNumber());
+                break;
+            case 2:
+                whenceField.setValue("000000000000" + DashboardPage.getCardTwoNumber());
+                break;
+        }
+        sum.setValue(String.valueOf(amount));
         topButton.click();
         return amount;
     }

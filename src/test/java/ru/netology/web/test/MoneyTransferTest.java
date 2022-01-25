@@ -16,10 +16,10 @@ import static com.codeborne.selenide.Selenide.open;
 public class MoneyTransferTest {
 
     DashboardPage dashboardPage;
-    int cardOneBalanceStart;
-    int cardTwoBalanceStart;
-    int cardOneBalanceFinish;
-    int cardTwoBalanceFinish;
+    private static int cardOneBalanceStart;
+    private static int cardTwoBalanceStart;
+    private static int cardOneBalanceFinish;
+    private static int cardTwoBalanceFinish;
 
     @BeforeEach
     void beforeScenarios() {
@@ -38,20 +38,20 @@ public class MoneyTransferTest {
     @Test
     void shouldTransferMoneyFromTwoToOne() {
         int sum = 10000;
-        DataHelper.CardsInfo cardsInfo = DataHelper.getCardsNumbers();
-        CardReplenishment cardReplenishment = dashboardPage.selectCardButton(dashboardPage.cardOne);
-        cardReplenishment.topUpTheCard(sum, cardsInfo);
-        cardOneBalanceFinish = dashboardPage.getBalance(dashboardPage.cardOne);
+        DataHelper.CardInfo cardInfo = DataHelper.getCardOneId();
+        CardReplenishment cardReplenishment = dashboardPage.selectCardButton(cardInfo.getCardId());
+        cardReplenishment.topUpTheCard(sum, 1);
+        cardOneBalanceFinish = DashboardPage.getFirstCardBalance();
         Assertions.assertEquals(cardOneBalanceStart + sum, cardOneBalanceFinish);
     }
 
     @Test
     void shouldTransferMoneyFromOneToTwo() {
         int sum = 1;
-        DataHelper.CardsInfo cardsInfo = DataHelper.getCardsNumbers();
-        CardReplenishment cardReplenishment = dashboardPage.selectCardButton(dashboardPage.cardTwo);
-        cardReplenishment.topUpTheCard(sum, cardsInfo);
-        cardTwoBalanceFinish = dashboardPage.getBalance(dashboardPage.cardTwo);
+        DataHelper.CardInfo cardInfo = DataHelper.getCardTwoId();
+        CardReplenishment cardReplenishment = dashboardPage.selectCardButton(cardInfo.getCardId());
+        cardReplenishment.topUpTheCard(sum, 2);
+        cardTwoBalanceFinish = DashboardPage.getSecondCardBalance();
         Assertions.assertEquals(cardTwoBalanceStart + sum, cardTwoBalanceFinish);
     }
 }

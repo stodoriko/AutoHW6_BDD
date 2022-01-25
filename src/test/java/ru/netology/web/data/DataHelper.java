@@ -30,13 +30,16 @@ public class DataHelper {
     }
 
     @Value
-    public static class CardsInfo {
-        private String cardNumber1;
-        private String cardNumber2;
+    public static class CardInfo {
+        private String cardId;
     }
 
-    public static CardsInfo getCardsNumbers() {
-        return new CardsInfo("5559000000000001", "5559000000000002");
+    public static CardInfo getCardOneId() {
+        return new CardInfo("92df3f1c-a033-48e6-8390-206f6b1f56c0");
+    }
+
+    public static CardInfo getCardTwoId() {
+        return new CardInfo("0f3f5c2a-249e-4c3d-8287-09f7a039391d");
     }
 
     @Value
