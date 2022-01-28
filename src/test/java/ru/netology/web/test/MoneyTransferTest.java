@@ -14,20 +14,17 @@ import static com.codeborne.selenide.Selenide.open;
 public class MoneyTransferTest {
 
     DashboardPage dashboardPage;
-    private static int cardOneBalanceStart;
-    private static int cardTwoBalanceStart;
-    private static int cardOneBalanceFinish;
-    private static int cardTwoBalanceFinish;
+    private int cardOneBalanceStart;
+    private int cardTwoBalanceStart;
+    private int cardOneBalanceFinish;
+    private int cardTwoBalanceFinish;
 
     @BeforeEach
     void beforeScenarios() {
-        open("http://localhost:9999/");
-        LoginPage loginPage = new LoginPage();
-        DataHelper.AutoInfo authInfo = DataHelper.getAutoInfo();
-
-        VerificationPage verificationPage = loginPage.validLogin(authInfo);
-        DataHelper.VerificationCode verificationInfo = DataHelper.getVerificationCodeFor();
-
+        var loginPage = open("http://localhost:9999/", LoginPage.class);
+        var authInfo = DataHelper.getAutoInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        var verificationInfo = DataHelper.getVerificationCodeFor();
         dashboardPage = verificationPage.validVerify(verificationInfo);
         cardOneBalanceStart = dashboardPage.getFirstCardBalance();
         cardTwoBalanceStart = dashboardPage.getSecondCardBalance();
@@ -36,20 +33,24 @@ public class MoneyTransferTest {
     @Test
     void shouldTransferMoneyFromTwoToOne() {
         int sum = 10000;
-        DataHelper.CardInfo cardInfo = DataHelper.getCardOneId();
-        CardReplenishment cardReplenishment = dashboardPage.selectCardButton(cardInfo.getCardId());
-        DashboardPage dashboardPage = cardReplenishment.topUpTheCard(sum, 1);
+        var cardInfo = DataHelper.getCardOneInfo();
+        var cardReplenishment = dashboardPage.selectCardButton(cardInfo.getCardId());
+        dashboardPage = cardReplenishment.topUpTheCard(sum, DataHelper.getCardTwoInfo().getCardNumber());
         cardOneBalanceFinish = dashboardPage.getFirstCardBalance();
+        cardTwoBalanceFinish = dashboardPage.getSecondCardBalance();
         Assertions.assertEquals(cardOneBalanceStart + sum, cardOneBalanceFinish);
+        Assertions.assertEquals(cardTwoBalanceStart - sum, cardTwoBalanceFinish);
     }
 
     @Test
     void shouldTransferMoneyFromOneToTwo() {
         int sum = 1;
-        DataHelper.CardInfo cardInfo = DataHelper.getCardTwoId();
-        CardReplenishment cardReplenishment = dashboardPage.selectCardButton(cardInfo.getCardId());
-        DashboardPage dashboardPage = cardReplenishment.topUpTheCard(sum, 2);
+        var cardInfo = DataHelper.getCardTwoInfo();
+        var cardReplenishment = dashboardPage.selectCardButton(cardInfo.getCardId());
+        dashboardPage = cardReplenishment.topUpTheCard(sum, DataHelper.getCardOneInfo().getCardNumber());
+        cardOneBalanceFinish = dashboardPage.getFirstCardBalance();
         cardTwoBalanceFinish = dashboardPage.getSecondCardBalance();
-        Assertions.assertEquals(cardTwoBalanceStart + sum, cardTwoBalanceFinish);
+        Assertions.assertEquals(cardOneBalanceStart + sum, cardOneBalanceFinish);
+        Assertions.assertEquals(cardTwoBalanceStart - sum, cardTwoBalanceFinish);
     }
 }

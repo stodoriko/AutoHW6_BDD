@@ -11,38 +11,30 @@ public class DashboardPage {
 
     private SelenideElement heading = $("[data-test-id=dashboard]");
     private static ElementsCollection cards = $$(".list__item");
-    private static String cardOneInnerText;
-    private static String cardTwoInnerText;
-    private static final String balanceStart = "баланс: ";
-    private static final String balanceFinish = " р.";
+    public String cardOneInnerText;
+    public String cardTwoInnerText;
+    private final String balanceStart = "баланс: ";
+    private final String balanceFinish = " р.";
 
     public DashboardPage() {
         heading.shouldBe(visible);
     }
 
-    public static int getFirstCardBalance() {
+    public int getFirstCardBalance() {
         cardOneInnerText = cards.get(0).text();
         return extractBalance(cardOneInnerText);
     }
 
-    public static int getSecondCardBalance() {
+    public int getSecondCardBalance() {
         cardTwoInnerText = cards.get(1).text();
         return extractBalance(cardTwoInnerText);
     }
 
-    private static int extractBalance(String text) {
+    private int extractBalance(String text) {
         val start = text.indexOf(balanceStart);
         val finish = text.indexOf(balanceFinish);
         val value = text.substring(start + balanceStart.length(), finish);
         return Integer.parseInt(value);
-    }
-
-    public static String getCardOneNumber() {
-        return cardOneInnerText.substring(14);
-    }
-
-    public static String getCardTwoNumber() {
-        return cardTwoInnerText.substring(14);
     }
 
     public CardReplenishment selectCardButton(String cardId) {

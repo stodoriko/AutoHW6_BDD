@@ -16,16 +16,9 @@ public class CardReplenishment {
         heading.shouldBe(Condition.visible);
     }
 
-    public DashboardPage    topUpTheCard(int amount, int card) {
+    public DashboardPage topUpTheCard(int amount, String cardNumber) {
         sum.setValue(String.valueOf(amount));
-        switch (card) {
-            case 1:
-                whenceField.setValue("000000000000" + DashboardPage.getCardTwoNumber());
-                break;
-            case 2:
-                whenceField.setValue("000000000000" + DashboardPage.getCardOneNumber());
-                break;
-        }
+        whenceField.setValue(cardNumber);
         topButton.click();
         return new DashboardPage();
     }
