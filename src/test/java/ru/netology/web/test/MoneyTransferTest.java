@@ -50,7 +50,7 @@ public class MoneyTransferTest {
         dashboardPage = cardReplenishment.topUpTheCard(sum, DataHelper.getCardOneInfo().getCardNumber());
         cardOneBalanceFinish = dashboardPage.getFirstCardBalance();
         cardTwoBalanceFinish = dashboardPage.getSecondCardBalance();
-        Assertions.assertEquals(cardOneBalanceStart + sum, cardOneBalanceFinish);
-        Assertions.assertEquals(cardTwoBalanceStart - sum, cardTwoBalanceFinish);
+        Assertions.assertEquals(cardTwoBalanceStart + sum, cardTwoBalanceFinish);
+        Assertions.assertEquals(cardOneBalanceStart - sum, cardOneBalanceFinish);
     }
 }
